@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Judgements.MainPage"
+             Background="#c2e3c8">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,90"
+            Spacing="30">
+            <Label
+                Text="Решение Судьи"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" Padding="0,0,50,0"/>
+            
+            <Button
+                x:Name="JudgementsBtn"
+                Text="Судья" 
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="JudgementsBtn_Clicked"
+                HorizontalOptions="Fill" />
+            
+            <Button
+                x:Name="ScoresBtn"
+                Text="Итоги соревнований" 
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnCounterClicked"
+                HorizontalOptions="Fill" />
+            
+            <Button
+                x:Name="AdminBtn"
+                Text="Администратор" 
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnCounterClicked"
+                HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
