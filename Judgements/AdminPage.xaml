@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
+             x:Class="Judgements.AdminPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}"
+             Title="Управление участниками"
+             Background="#c2e3c8">
+    <VerticalStackLayout Padding="10" Spacing="10">
+
+        <!-- Таб переключения -->
+        <Grid ColumnDefinitions="*,*" HeightRequest="50">
+            <Button x:Name="addTabBtn" Text="Добавить участника" 
+            Clicked="addTabBtn_Clicked"
+            BackgroundColor="#89c7d8"
+            TextColor="White" />
+            <Button x:Name="listTabBtn" Text="Участники"
+            Grid.Column="1"
+            Clicked="listTabBtn_Clicked"
+            BackgroundColor="#f0f4f8"
+            TextColor="#1f3a93" />
+        </Grid>
+
+        <!-- Контейнеры вкладок -->
+        <ContentView x:Name="AddTabContent">
+            <VerticalStackLayout Spacing="10">
+
+                <Entry x:Name="fullNameEntry" Placeholder="ФИО участника" />
+                <Picker x:Name="streamPicker" Title="Выбери поток" />
+
+                <Button Text="Добавить участника" Clicked="AddParticipantBtn_Clicked" x:Name="AddParticipantBtn"/>
+                <Button Text="Обновить участника" Clicked="updateBtn_Clicked" IsVisible="False" x:Name="updateBtn"/>
+                <Button Text="Удалить участника" Clicked="deleteBtn_Clicked" IsVisible="False" x:Name="deleteBtn"/>
+
+            </VerticalStackLayout>
+        </ContentView>
+
+        <ContentView x:Name="ListTabContent" IsVisible="False">
+            <VerticalStackLayout Spacing="10">
+
+                <Picker x:Name="filterStreamPicker" SelectedIndexChanged="FilterStreamPicker_SelectedIndexChanged" />
+                <SearchBar x:Name="searchBar" Placeholder="Поиск по ФИО..." TextChanged="SearchBar_TextChanged" />
+                <Label x:Name="participantsCountLabel" FontSize="16" FontAttributes="Bold" />
+
+                <CollectionView x:Name="participantsCollection"
+                                SelectionMode="Single"
+                                SelectionChanged="participantsCollection_SelectionChanged">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="10" CornerRadius="10" HasShadow="True" BackgroundColor="White">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding FullName}" FontSize="16" TextColor="Black" />
+                                    <Label Text="{Binding StreamId}" FontSize="12" TextColor="Gray" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ContentView>
+
+    </VerticalStackLayout>
+</ContentPage>

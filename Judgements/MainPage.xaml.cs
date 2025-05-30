@@ -25,5 +25,15 @@
         {
             Navigation.PushAsync(new JudgementPage());
         }
+
+        private void AdminBtn_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AdminLoginPage());
+        }
+
+        private void ScoresBtn_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ViewResultsByStream());
+        }
     }
 }

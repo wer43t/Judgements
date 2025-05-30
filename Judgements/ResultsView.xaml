@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Judgements.ResultsView"
+             Title="ResultsView"
+             Background="#c2e3c8">
+    <ScrollView>
+        <VerticalStackLayout Padding="20">
+            <Label Text="Итоги соревнований" FontSize="20" FontAttributes="Bold" />
+
+            <CollectionView x:Name="resultsCollectionView" IsGrouped="True">
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="40,*,100,60" BackgroundColor="#e0e0e0" Padding="4">
+                            <Label Text="№" FontAttributes="Bold" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                            <Label Text="Имя" FontAttributes="Bold" Grid.Column="1"/>
+                            <Label Text="Оценка" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center"/>
+                            <Label Text="Место" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="40,*,100,60" Padding="0,4">
+                            <Label Text="{Binding RowNumber}" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                            <Label Text="{Binding FullName}" Grid.Column="1"/>
+                            <Label Text="{Binding AverageScore, StringFormat='{}{0:F2}'}" Grid.Column="2" HorizontalTextAlignment="Center"/>
+                            <Label Text="{Binding Place}" Grid.Column="3" HorizontalTextAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

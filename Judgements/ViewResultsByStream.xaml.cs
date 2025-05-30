@@ -2,19 +2,16 @@ using Judgements.Models;
 
 namespace Judgements;
 
-public partial class AuthorizedJudgementPage : ContentPage
+public partial class ViewResultsByStream : ContentPage
 {
     public string Header { get; set; }
     private readonly DataCore _dataCore = new DataCore();
     private readonly Judge _judge;
 
-    public AuthorizedJudgementPage(Judge entity)
+    public ViewResultsByStream()
 	{
 		InitializeComponent();
         OnLoad();
-        Header = entity.Name;
-        _judge = entity;
-        BindingContext = this;
     }
 
     private async void OnLoad()
@@ -32,7 +29,7 @@ public partial class AuthorizedJudgementPage : ContentPage
         }
         if (stream != null)
         {
-            await Navigation.PushAsync(new ScoreView(_judge, stream));
+            await Navigation.PushAsync(new ResultsView(stream));
         }
     }
 
@@ -46,7 +43,7 @@ public partial class AuthorizedJudgementPage : ContentPage
         }
         if (stream != null)
         {
-            await Navigation.PushAsync(new ScoreView(_judge, stream));
+            await Navigation.PushAsync(new ResultsView(stream));
         }
     }
 
@@ -60,7 +57,7 @@ public partial class AuthorizedJudgementPage : ContentPage
         }
         if (stream != null)
         {
-            await Navigation.PushAsync(new ScoreView(_judge, stream));
+            await Navigation.PushAsync(new ResultsView(stream));
         }
     }
 }

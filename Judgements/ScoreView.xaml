@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Judgements.ScoreView"
+             Title="ScoreView"
+             HideSoftInputOnTapped="True"
+             Background="#c2e3c8">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="20">
+                <Label Text="Участники" FontSize="20" FontAttributes="Bold" />
+
+                <CollectionView x:Name="groupedParticipantsCollection" IsGrouped="True">
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="40,*,100,60" BackgroundColor="#e0e0e0" Padding="4">
+                                <Label Text="№" FontAttributes="Bold" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                <Label Text="Имя" FontAttributes="Bold" Grid.Column="1"/>
+                                <Label Text="Оценка" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center"/>
+                                <Label Text="" Grid.Column="3"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="40,*,100,60" Padding="0,4">
+                                <Label Text="{Binding RowNumber}" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding FullName}" Grid.Column="1"/>
+                                <Entry  x:Name="Score"  Text="{Binding Score, Mode=TwoWay}"
+                           IsEnabled="{Binding CanEdit}"
+                           Placeholder="Оценка"
+                           Keyboard="Default"
+                           Grid.Column="2"
+                           HorizontalTextAlignment="Center"
+                           Focused="Entry_Focused"
+                                    TextChanged="Score_TextChanged"/>
+                                <Button Text="OK"
+                            Padding="0"
+                            FontSize="12"
+                            IsVisible="{Binding IsEditing}"
+                            IsEnabled="{Binding CanEdit}"
+                            Clicked="ConfirmScore_Clicked"
+                            Grid.Column="3"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+
+                <Button Text="Сохранить оценки" Clicked="SaveScores_Clicked" />
+            </VerticalStackLayout>
+        </ScrollView>
+        <BoxView x:Name="loadingBackground"
+                 BackgroundColor="#80000000" IsVisible="False"
+                 InputTransparent="True" Grid.RowSpan="2" Grid.ColumnSpan="2" ZIndex="10" />
+        <ActivityIndicator x:Name="loadingIndicator"
+                           IsRunning="False"
+                           IsVisible="False"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Color="Aqua"
+                           ZIndex="20" />
+    </Grid>
+</ContentPage>

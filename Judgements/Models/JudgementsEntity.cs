@@ -1,22 +1,65 @@
 ﻿using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Judgements.Models
 {
-    [Table("judgements")]
-    public class JudgementsEntity : BaseModel
+    [Table("judges")]
+    public class Judge : BaseModel
     {
         [PrimaryKey("id")]
-        public int Id { get; set; }
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; }
+        public Guid Id { get; set; }
+
         [Column("name")]
         public string Name { get; set; }
-        //... etc.
+    }
+
+    [Table("admins")]
+    public class Admin : BaseModel
+    {
+        [PrimaryKey("id")]
+        public Guid Id { get; set; }
+
+        [Column("name")]
+        public string Name { get; set; }
+    }
+
+    [Table("streams")]
+    public class Stream : BaseModel
+    {
+        [PrimaryKey("id")]
+        public Guid Id { get; set; }
+
+        [Column("name")]
+        public string Name { get; set; }
+    }
+
+    [Table("participants")]
+    public class Participant : BaseModel
+    {
+        [PrimaryKey("id")]
+        public Guid Id { get; set; }
+
+        [Column("full_name")]
+        public string FullName { get; set; }
+
+        [Column("stream_id")]
+        public Guid StreamId { get; set; }
+    }
+
+    [Table("scores")]
+    public class Score : BaseModel
+    {
+        [PrimaryKey("id")]
+        public Guid Id { get; set; }
+
+        [Column("judge_id")]
+        public Guid JudgeId { get; set; }
+
+        [Column("participant_id")]
+        public Guid ParticipantId { get; set; }
+
+        [Column("value")]
+        public float Value { get; set; }
     }
 }

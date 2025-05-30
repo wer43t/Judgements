@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Judgements.ViewResultsByStream"
+                Background="#c2e3c8">
+
+    <VerticalStackLayout>
+        <VerticalStackLayout
+Padding="30,20"
+Spacing="30">
+            <Button
+    x:Name="JudgementsBtn"
+    Text="Итоги соревнований" 
+    HorizontalOptions="Fill" 
+            IsEnabled="False" FontAttributes="Bold,Italic"/>
+
+            <Button
+    x:Name="StreamOne"
+    Text="Поток 1"
+    Clicked="StreamOne_Clicked"
+    SemanticProperties.Hint="Counts the number of times you click"
+    HorizontalOptions="Fill" 
+                Margin="50,0"/>
+
+            <Button
+    x:Name="StreamTwo"
+    Text="Поток 2"
+    Clicked="StreamTwo_Clicked"
+    SemanticProperties.Hint="Counts the number of times you click"
+    HorizontalOptions="Fill" />
+            <Button
+    x:Name="StreamThree"
+    Text="Поток 3"
+    Clicked="StreamThree_Clicked"
+    SemanticProperties.Hint="Counts the number of times you click"
+    HorizontalOptions="Fill" Margin="50,0" />
+
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

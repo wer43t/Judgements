@@ -24,14 +24,14 @@
                 x:Name="ScoresBtn"
                 Text="Итоги соревнований" 
                 SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
+                Clicked="ScoresBtn_Clicked"
                 HorizontalOptions="Fill" />
             
             <Button
                 x:Name="AdminBtn"
                 Text="Администратор" 
                 SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
+                Clicked="AdminBtn_Clicked"
                 HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
