@@ -4,8 +4,10 @@
              xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
              x:Class="Judgements.AdminPage"
              BackgroundColor="{DynamicResource PageBackgroundColor}"
-             Title="Управление участниками"
+             HideSoftInputOnTapped="True"
              Background="#c2e3c8">
+    <ScrollView>
+        
     <VerticalStackLayout Padding="10" Spacing="10">
 
         <!-- Таб переключения -->
@@ -41,24 +43,31 @@
                 <Picker x:Name="filterStreamPicker" SelectedIndexChanged="FilterStreamPicker_SelectedIndexChanged" />
                 <SearchBar x:Name="searchBar" Placeholder="Поиск по ФИО..." TextChanged="SearchBar_TextChanged" />
                 <Label x:Name="participantsCountLabel" FontSize="16" FontAttributes="Bold" />
+                <Button Text="Очистить всех участников"
+        BackgroundColor="Red"
+        TextColor="White"
+        Clicked="ClearAllParticipantsBtn_Clicked"/>
+
 
                 <CollectionView x:Name="participantsCollection"
                                 SelectionMode="Single"
                                 SelectionChanged="participantsCollection_SelectionChanged">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame Padding="10" CornerRadius="10" HasShadow="True" BackgroundColor="White">
-                                <VerticalStackLayout>
-                                    <Label Text="{Binding FullName}" FontSize="16" TextColor="Black" />
-                                    <Label Text="{Binding StreamId}" FontSize="12" TextColor="Gray" />
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <VerticalStackLayout Spacing="2">
+                                    <VerticalStackLayout Padding="10" BackgroundColor="White">
+                                        <Label Text="{Binding FullName}" FontSize="16" TextColor="Black" />
+                                    </VerticalStackLayout>
+                                    <BoxView HeightRequest="1" Color="#cccccc" />
                                 </VerticalStackLayout>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
 
             </VerticalStackLayout>
         </ContentView>
 
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

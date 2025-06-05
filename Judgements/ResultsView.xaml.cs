@@ -130,4 +130,51 @@ public partial class ResultsView : ContentPage
 
         return groupedResults;
     }
+
+    private async void ExportToExcel_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            using var workbook = new ClosedXML.Excel.XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("Итоги");
+
+            // Заголовки
+            worksheet.Cell(1, 1).Value = "№";
+            worksheet.Cell(1, 2).Value = "ФИО";
+            worksheet.Cell(1, 3).Value = "Оценка";
+            worksheet.Cell(1, 4).Value = "Место";
+
+            int row = 2;
+            foreach (var group in resultsCollectionView.ItemsSource as List<List<ParticipantResultViewModel>> ?? [])
+            {
+                foreach (var result in group)
+                {
+                    worksheet.Cell(row, 1).Value = result.RowNumber;
+                    worksheet.Cell(row, 2).Value = result.FullName;
+                    worksheet.Cell(row, 3).Value = result.AverageScore.HasValue ? result.AverageScore.Value.ToString("F2") : "";
+                    worksheet.Cell(row, 4).Value = result.Place;
+                    row++;
+                }
+
+                // Пропускаем строку между группами
+                row++;
+            }
+
+            // Сохраняем в файл
+            var fileName = $"Итоги_{_stream.Name}_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+            var localPath = Path.Combine(FileSystem.CacheDirectory, fileName);
+            workbook.SaveAs(localPath);
+
+            await Share.Default.RequestAsync(new ShareFileRequest
+            {
+                Title = "Поделиться Excel",
+                File = new ShareFile(localPath)
+            });
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Ошибка", $"Не удалось экспортировать: {ex.Message}", "OK");
+        }
+    }
+
 }

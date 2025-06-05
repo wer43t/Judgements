@@ -2,11 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Judgements.ResultsView"
-             Title="ResultsView"
+             HideSoftInputOnTapped="True"
              Background="#c2e3c8">
     <ScrollView>
         <VerticalStackLayout Padding="20">
-            <Label Text="Итоги соревнований" FontSize="20" FontAttributes="Bold" />
+            <Label Text="Итоги соревнований" FontSize="20" FontAttributes="Bold" Padding="0,0,40,0" />
+            <Button Text="📥 Экспорт в Excel"
+        Clicked="ExportToExcel_Clicked"
+        BackgroundColor="#89c7d8"
+        TextColor="White"
+        FontAttributes="Bold"
+        Margin="0,10" />
+
 
             <CollectionView x:Name="resultsCollectionView" IsGrouped="True">
                 <CollectionView.GroupHeaderTemplate>

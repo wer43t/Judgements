@@ -16,7 +16,7 @@ public partial class AdminPage : ContentPage
         LoadData();
     }
 
-    private async void LoadData()
+    private async Task LoadData()
     {
         await _dataCore.InitializeAsync();
 
@@ -70,7 +70,7 @@ public partial class AdminPage : ContentPage
         };
 
         await _dataCore.AddParticipantAsync(newParticipant);
-        LoadData();
+        await LoadData();
         ClearForm();
     }
 
@@ -84,8 +84,19 @@ public partial class AdminPage : ContentPage
             streamPicker.SelectedIndex = index;
             updateBtn.IsVisible = true;
             deleteBtn.IsVisible = true;
+
+            // Переключаемся на вкладку редактирования
+            AddTabContent.IsVisible = true;
+            ListTabContent.IsVisible = false;
+
+            addTabBtn.BackgroundColor = Color.FromArgb("#89c7d8");
+            addTabBtn.TextColor = Colors.White;
+
+            listTabBtn.BackgroundColor = Color.FromArgb("#f0f4f8");
+            listTabBtn.TextColor = Color.FromArgb("#1f3a93");
         }
     }
+
 
     private async void updateBtn_Clicked(object sender, EventArgs e)
     {
@@ -95,7 +106,7 @@ public partial class AdminPage : ContentPage
         _selectedParticipant.StreamId = _streams[streamPicker.SelectedIndex].Id;
 
         await _dataCore.UpdateParticipantAsync(_selectedParticipant);
-        LoadData();
+        await LoadData();
         ClearForm();
     }
 
@@ -104,7 +115,7 @@ public partial class AdminPage : ContentPage
         if (_selectedParticipant == null) return;
 
         await _dataCore.DeleteParticipantAsync(_selectedParticipant.Id);
-        LoadData();
+        await LoadData();
         ClearForm();
     }
 
@@ -128,6 +139,25 @@ public partial class AdminPage : ContentPage
         listTabBtn.BackgroundColor = Color.FromArgb("#f0f4f8");
         listTabBtn.TextColor = Color.FromArgb("#1f3a93");
     }
+
+    private async void ClearAllParticipantsBtn_Clicked(object sender, EventArgs e)
+    {
+        var confirmed = await DisplayAlert("Подтверждение", "Удалить всех участников?", "Да", "Нет");
+        if (confirmed)
+        {
+            try
+            {
+                await _dataCore.DeleteAllParticipantsAsync();
+                await LoadData(); // если LoadData async Task
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Ошибка", $"Не удалось удалить участников: {ex.Message}", "OK");
+            }
+        }
+    }
+
+
 
     private void listTabBtn_Clicked(object sender, EventArgs e)
     {

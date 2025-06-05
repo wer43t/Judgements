@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Judgements.AuthorizedJudgementPage"
-                Background="#c2e3c8">
+                Background="#c2e3c8"
+             HideSoftInputOnTapped="True">
 
     <VerticalStackLayout>
         <VerticalStackLayout
@@ -20,20 +21,21 @@ Spacing="30">
     Clicked="StreamOne_Clicked"
     SemanticProperties.Hint="Counts the number of times you click"
     HorizontalOptions="Fill" 
-                Margin="50,0"/>
+                Margin="0,50,0,0"/>
 
             <Button
     x:Name="StreamTwo"
     Text="Поток 2"
     Clicked="StreamTwo_Clicked"
     SemanticProperties.Hint="Counts the number of times you click"
-    HorizontalOptions="Fill" />
+    HorizontalOptions="Fill" 
+                 />
             <Button
     x:Name="StreamThree"
     Text="Поток 3"
     Clicked="StreamThree_Clicked"
     SemanticProperties.Hint="Counts the number of times you click"
-    HorizontalOptions="Fill" Margin="50,0" />
+    HorizontalOptions="Fill" />
 
         </VerticalStackLayout>
     </VerticalStackLayout>

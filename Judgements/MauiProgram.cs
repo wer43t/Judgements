@@ -1,4 +1,4 @@
-﻿using Android.Content.Res;
+﻿
 using Microsoft.Extensions.Logging;
 
 namespace Judgements

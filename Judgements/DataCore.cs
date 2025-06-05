@@ -84,6 +84,9 @@ namespace Judgements
         // === PARTICIPANTS ===
         // Получить всех участников
 
+
+
+
         public async Task<List<Participant>> GetParticipantsByStreamAsync(Guid streamId)
         {
             var response = await _supabaseClient
@@ -121,6 +124,17 @@ namespace Judgements
             var participant = new Participant { Id = id };
             await _supabaseClient.From<Participant>().Delete(participant);
         }
+
+
+        public async Task DeleteAllParticipantsAsync()
+        {
+            await _supabaseClient
+                .From<Participant>().
+                Where(x => x.Id != null)
+                .Delete(new Supabase.Postgrest.QueryOptions()); // Используем QueryOptions вместо Dictionary
+        }
+
+
 
         // === SCORES ===
         public async Task AddScoreAsync(Score score)

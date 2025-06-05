@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Judgements.JudgementPage"
              Title=""
+             HideSoftInputOnTapped="True"
                           Background="#c2e3c8">
 
     <VerticalStackLayout>
@@ -19,10 +20,10 @@
 
                 <StackLayout>
                     <Label Text="Введите имя:" FontSize="28"/>
-                    <StackLayout Orientation="Horizontal">
+                    <HorizontalStackLayout>
                         <Image Source="pencil_24.png" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFill"/>
-                        <Entry x:Name="nameEntry"  TextColor="Black" StyleClass="bottom-border"/>
-                    </StackLayout>
+                        <Entry x:Name="nameEntry"  TextColor="Black" StyleClass="bottom-border" WidthRequest="300"/>
+                    </HorizontalStackLayout>
                 </StackLayout>
 
                 <Button
